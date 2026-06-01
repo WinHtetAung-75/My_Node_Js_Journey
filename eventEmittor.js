@@ -125,7 +125,7 @@ paymentSystem.on("pay", () => {
   console.log("Checking The Stocks");
 });
 
-paymentSystem.on("pa$y", (item, amount) => {
+paymentSystem.on("pay", (item, amount) => {
   console.log(`${item} - ${amount} is Sold Out`);
 });
 

@@ -11,13 +11,13 @@ const fs = require("fs");
 // const data = fs.readFileSync("text.txt", "utf-8");
 // console.log(data);
 
-// // // Append
-// fs.appendFileSync("text.txt", "One");
-// fs.appendFileSync("text.txt", "Two");
-// fs.appendFileSync("text.txt", "Three");
+// // Append
+fs.appendFileSync("text.txt", "One");
+fs.appendFileSync("text.txt", "Two");
+fs.appendFileSync("text.txt", "Three");
 
-// const lastData = fs.readFileSync("text.txt", "utf-8");
-// console.log(lastData);
+const lastData = fs.readFileSync("text.txt", "utf-8");
+console.log(lastData);
 
 // // //// Write / Append / Read Async
 // // /// Read   Can Access Result As A Paremeter
@@ -49,16 +49,16 @@ const fs = require("fs");
 
 // //// Delete File And Create Dir
 // /// Delete File
-fs.unlink("text.txt", (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Delete File Successfully");
-  }
-});
+// fs.unlink("text.txt", (err) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Delete File Successfully");
+//   }
+// });
 
-// // Create Dir
-fs.mkdir("Test", (err) => {
-  if (err) console.log(err);
-  else console.log("Create Dir Successfully");
-});
+// // // Create Dir
+// fs.mkdir("Test", (err) => {
+//   if (err) console.log(err);
+//   else console.log("Create Dir Successfully");
+// });
