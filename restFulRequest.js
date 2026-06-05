@@ -46,6 +46,39 @@ myServer.get("/staff", function (req, res) {
   res.json({ con: true, msg: "Succcess", result: { data: staff } });
 });
 
+// // Get Method With Parameter
+// myServer.get("/staff/:name", function (req, res,next) {
+//   let queryName = req.params.name;
+//   let user = staff.find((s) => s.name === queryName);
+//   if (user) {
+//     res.json({ con: true, msg: "Success", Result: { data: user } });
+//   } else {
+//     next(new Error("No User With That Name"));
+//   }
+// });
+
+// // Response Name And Age From The Params
+myServer.get("/staff/:name/:age", function (req, res) {
+  let name = req.params.name;
+  let age = req.params.age;
+  res.json({ con: true, msg: "Success", result: { data: { name, age } } });
+});
+
+// // Get All Names With Get Method
+myServer.get("/staff/names", function (req, res) {
+  let names = staff.map((s) => s.name);
+  res.json({ con: true, msg: "Show All Names", Result: { data: names } });
+});
+
+// // Get Total Salary With Get Method
+myServer.get("/totalSalary", function (req, resp) {
+  let totalSalary = staff.reduce((total, staff) => total + staff.salary, 0);
+  resp.json({
+    con: true,
+    msg: "Give Total Salary",
+    Result: { data: totalSalary },
+  });
+});
 // // Post Method // //
 // //Simple Post Method ////
 myServer.post("/", function (req, res) {
@@ -71,6 +104,50 @@ myServer.post("/newUser", function (req, res) {
   let newUser = req.body;
   staff.push(newUser);
   res.json({ con: true, msg: "Success", result: { data: staff } });
+});
+
+// // Patch Method Update Salary From Params
+myServer.patch("/staff/:name/:salary", function (req, res, next) {
+  let name = req.params.name;
+  let salary = Number(req.params.salary);
+
+  let foundUser = staff.find((s) => s.name === name);
+
+  if (foundUser) {
+    foundUser.salary = salary;
+    res.json({ con: true, msg: "Updated Salary", Result: { data: foundUser } });
+  } else {
+    next(new Error("No User With That Name"));
+  }
+});
+
+// // Patch Method Update Salary From Body Data
+myServer.patch("/staff/bodyData", function (req, res, next) {
+  let name = req.body.name;
+  let salary = req.body.salary;
+
+  let foundUser = staff.find((s) => s.name === name);
+
+  if (foundUser) {
+    foundUser.salary = salary;
+    res.json({ con: true, msg: "Success", Result: { data: foundUser } });
+  } else {
+    next(new Error("No User With That Name"));
+  }
+});
+
+// // Delete Method
+myServer.delete("/staff/:name", function (req, res, next) {
+  let name = req.params.name;
+
+  let foundUser = staff.find((s) => s.name === name);
+
+  if (foundUser) {
+    let result = staff.filter((s) => s.name != foundUser.name);
+    res.json({ con: true, msg: "Delete Name", Result: { data: result } });
+  } else {
+    next(new Error("No User With That Name"));
+  }
 });
 
 // Listen My Server //
