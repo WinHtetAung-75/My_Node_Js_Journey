@@ -79,6 +79,7 @@ myServer.get("/totalSalary", function (req, resp) {
     Result: { data: totalSalary },
   });
 });
+
 // // Post Method // //
 // //Simple Post Method ////
 myServer.post("/", function (req, res) {
